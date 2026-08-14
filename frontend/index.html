@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital VidaNova</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f4f8fb;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .login{
+            background:#fff;
+            padding:40px;
+            border-radius:15px;
+            box-shadow:0 0 20px rgba(0,0,0,.15);
+            width:350px;
+            text-align:center;
+        }
+
+        .logo{
+            width:180px;
+            margin-bottom:25px;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+            border:1px solid #ccc;
+            border-radius:8px;
+            font-size:16px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            margin-top:15px;
+            border:none;
+            border-radius:8px;
+            background:#00897b;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        button:hover{
+            background:#00695c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login">
+
+    <!-- Coloque sua logo aqui -->
+    <img src="Hospital.png" alt="Hospital VidaNova" class="logo">
+
+    <input
+        id="usuario"
+        placeholder="👤 Usuário"
+        autocomplete="username"
+    >
+
+    <input
+        id="senha"
+        type="password"
+        placeholder="🔒 Senha"
+        autocomplete="current-password"
+    >
+
+    <button onclick="login()">
+        Entrar
+    </button>
+
+</div>
+
+<script>
+function login(){
+    const usuario = document.getElementById("usuario").value;
+    const senha = document.getElementById("senha").value;
+
+    if(usuario === "" || senha === ""){
+        alert("Preencha usuário e senha!");
+        return;
+    }
+
+    alert("Login realizado!");
+}
+</script>
+
+</body>
+</html>
