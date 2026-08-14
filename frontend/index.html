@@ -89,8 +89,24 @@
 </div>
 
 <script>
-function login(){
-    const usuario = document.getElementById("usuario").value;
+fetch("/login", {
+
+    method: "POST,
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+    usuario: usuario.value,
+    senha: senha.value
+    })
+})
+    .then(r => r.json())
+    .then(data => {
+    if(data.tipo == "triagem") location.href = "triagem.html 
+    if(data.tipo == "medico") location.href = "medico.html 
+    if(data.tipo == "atendimento") location.href = "atendimento.html
+    });
+
+
+        const usuario = document.getElementById("usuario").value;
     const senha = document.getElementById("senha").value;
 
     if(usuario === "" || senha === ""){
