@@ -1,122 +1,418 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospital VidaNova</title>
+
+    <title>Hospital VidaNova - Login</title>
+
 
     <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, Helvetica, sans-serif;
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-        body{
-            background:#f4f8fb;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
+
+        body {
+
+            min-height: 100vh;
+
+            background: #f4f8fb;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
         }
 
-        .login{
-            background:#fff;
-            padding:40px;
-            border-radius:15px;
-            box-shadow:0 0 20px rgba(0,0,0,.15);
-            width:350px;
-            text-align:center;
+
+        .login {
+
+            width: 350px;
+
+            padding: 40px;
+
+            background: #ffffff;
+
+            border-radius: 15px;
+
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+            text-align: center;
+
         }
 
-        .logo{
-            width:180px;
-            margin-bottom:25px;
+
+        .logo {
+
+            width: 180px;
+
+            max-width: 100%;
+
+            margin-bottom: 20px;
+
         }
 
-        input{
-            width:100%;
-            padding:12px;
-            margin:10px 0;
-            border:1px solid #ccc;
-            border-radius:8px;
-            font-size:16px;
+
+        h1 {
+
+            color: #00897b;
+
+            font-size: 24px;
+
+            margin-bottom: 25px;
+
         }
 
-        button{
-            width:100%;
-            padding:12px;
-            margin-top:15px;
-            border:none;
-            border-radius:8px;
-            background:#00897b;
-            color:white;
-            font-size:16px;
-            cursor:pointer;
-            transition:.3s;
+
+        input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            margin-bottom: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            outline: none;
+
         }
 
-        button:hover{
-            background:#00695c;
+
+        input:focus {
+
+            border-color: #00897b;
+
+            box-shadow: 0 0 5px rgba(0, 137, 123, 0.25);
+
         }
+
+
+        button {
+
+            width: 100%;
+
+            padding: 13px;
+
+            margin-top: 5px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #00897b;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        button:hover {
+
+            background: #00695c;
+
+        }
+
+
+        button:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        #mensagem {
+
+            margin-top: 15px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            min-height: 20px;
+
+        }
+
     </style>
+
 </head>
+
+
 <body>
 
-<div class="login">
 
-    <!-- Coloque sua logo aqui -->
-    <img src="Hospital.png" alt="Hospital VidaNova" class="logo">
-
-    <input
-        id="usuario"
-        placeholder="👤 Usuário"
-        autocomplete="username"
-    >
-
-    <input
-        id="senha"
-        type="password"
-        placeholder="🔒 Senha"
-        autocomplete="current-password"
-    >
-
-    <button onclick="login()">
-        Entrar
-    </button>
-
-</div>
-
-<script>
-fetch("/login", {
-
-    method: "POST,
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-    usuario: usuario.value,
-    senha: senha.value
-    })
-})
-    .then(r => r.json())
-    .then(data => {
-    if(data.tipo == "triagem") location.href = "triagem.html 
-    if(data.tipo == "medico") location.href = "medico.html 
-    if(data.tipo == "atendimento") location.href = "atendimento.html
-    });
+    <div class="login">
 
 
-        const usuario = document.getElementById("usuario").value;
-    const senha = document.getElementById("senha").value;
+        <img
+            src="Hospital.png"
+            alt="Hospital VidaNova"
+            class="logo"
+        >
 
-    if(usuario === "" || senha === ""){
-        alert("Preencha usuário e senha!");
-        return;
-    }
 
-    alert("Login realizado!");
-}
-</script>
+        <h1>
+            Hospital VidaNova
+        </h1>
+
+
+        <input
+            id="usuario"
+            type="text"
+            placeholder="👤 Usuário"
+            autocomplete="username"
+        >
+
+
+        <input
+            id="senha"
+            type="password"
+            placeholder="🔒 Senha"
+            autocomplete="current-password"
+        >
+
+
+        <button
+            id="btnLogin"
+            type="button"
+        >
+            Entrar
+        </button>
+
+
+        <p id="mensagem"></p>
+
+
+    </div>
+
+
+    <script>
+
+
+        // ============================================
+        // PEGAR ELEMENTOS
+        // ============================================
+
+        const usuarioInput =
+            document.getElementById("usuario");
+
+        const senhaInput =
+            document.getElementById("senha");
+
+        const btnLogin =
+            document.getElementById("btnLogin");
+
+        const mensagem =
+            document.getElementById("mensagem");
+
+
+        // ============================================
+        // FUNÇÃO DE LOGIN
+        // ============================================
+
+        function fazerLogin() {
+
+
+            const usuario =
+                usuarioInput.value.trim().toLowerCase();
+
+            const senha =
+                senhaInput.value.trim();
+
+
+            // ========================================
+            // VERIFICAR CAMPOS
+            // ========================================
+
+            if (usuario === "") {
+
+                mensagem.style.color = "red";
+
+                mensagem.textContent =
+                    "Digite o usuário.";
+
+                usuarioInput.focus();
+
+                return;
+
+            }
+
+
+            if (senha === "") {
+
+                mensagem.style.color = "red";
+
+                mensagem.textContent =
+                    "Digite a senha.";
+
+                senhaInput.focus();
+
+                return;
+
+            }
+
+
+            // ========================================
+            // TRIAGEM
+            // ========================================
+
+            if (
+                usuario === "triagem" &&
+                senha === "1234"
+            ) {
+
+                entrarNaPagina("triagem.html");
+
+                return;
+
+            }
+
+
+            // ========================================
+            // MÉDICO
+            // ========================================
+
+            if (
+                usuario === "medico" &&
+                senha === "1234"
+            ) {
+
+                entrarNaPagina("medico.html");
+
+                return;
+
+            }
+
+
+            // ========================================
+            // ATENDIMENTO
+            // ========================================
+
+            if (
+                usuario === "atendimento" &&
+                senha === "1234"
+            ) {
+
+                entrarNaPagina("atendimento.html");
+
+                return;
+
+            }
+
+
+            // ========================================
+            // LOGIN INCORRETO
+            // ========================================
+
+            mensagem.style.color = "red";
+
+            mensagem.textContent =
+                "Usuário ou senha incorretos.";
+
+            senhaInput.value = "";
+
+            senhaInput.focus();
+
+        }
+
+
+        // ============================================
+        // REDIRECIONAR
+        // ============================================
+
+        function entrarNaPagina(pagina) {
+
+
+            mensagem.style.color = "#00897b";
+
+            mensagem.textContent =
+                "Login realizado! Aguarde...";
+
+
+            btnLogin.disabled = true;
+
+            btnLogin.textContent =
+                "Entrando...";
+
+
+            setTimeout(function() {
+
+                window.location.replace(pagina);
+
+            }, 300);
+
+        }
+
+
+        // ============================================
+        // CLIQUE NO BOTÃO
+        // ============================================
+
+        btnLogin.addEventListener(
+            "click",
+            fazerLogin
+        );
+
+
+        // ============================================
+        // ENTER NO USUÁRIO
+        // ============================================
+
+        usuarioInput.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    fazerLogin();
+
+                }
+
+            }
+        );
+
+
+        // ============================================
+        // ENTER NA SENHA
+        // ============================================
+
+        senhaInput.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    fazerLogin();
+
+                }
+
+            }
+        );
+
+
+    </script>
+
 
 </body>
+
 </html>
